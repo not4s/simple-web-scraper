@@ -12,7 +12,7 @@ public class QueryProcessor {
         }
 
         if (query.toLowerCase().contains("asimov")) {
-            results.append("TEST QUERY Isaac Asimov (2 January 1920 - 6 April 1992) was an\n" +
+            results.append("Isaac Asimov (2 January 1920 - 6 April 1992) was an\n" +
                            "American writer and professor of Biochemistry, famous for\n" +
                            "his works of hard science fiction and popular science. \n");
             results.append(System.lineSeparator());
