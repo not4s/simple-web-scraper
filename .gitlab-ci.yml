@@ -5,27 +5,13 @@ maven-compile:
 
 maven-test:
   stage: test
-  needs: 
-    - maven-compile
   script:
     - mvn test
 
-maven-package:
+deploy-app:
   stage: deploy
-  needs: 
-    - maven-compile
-    - job: maven-test
-      artifacts: false
-  script:
-    - mvn package
-
-host-website:
-  stage: deploy
-  needs: 
-    - maven-compile
-    - maven-package
   interruptible: true
   script:
+    - mvn package
     - export PORT=5000
-    - sh target/bin/simplewebapp
-  
+    - sh target/bin/simplewebapp &
