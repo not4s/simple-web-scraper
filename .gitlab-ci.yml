@@ -8,6 +8,8 @@ maven-compile:
 
 maven-package:
   stage: build
+  artifacts: 
+    untracked: true
   script:
     - mvn package
 
