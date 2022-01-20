@@ -18,6 +18,6 @@ deploy-app:
   variables:
     PORT: 5000
   script:
-    - fuser -k "$PORT"/tcp # kill existing connections on port 5000/tcp
-    - export PORT="$PORT"
+    - fuser -k ${PORT}/tcp # kill existing connections on port 5000/tcp
+    - export PORT=${PORT}
     - sh target/bin/simplewebapp & # run in background
