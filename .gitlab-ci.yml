@@ -13,9 +13,15 @@ maven-test:
   script:
     - mvn test
 
-deploy-app:
+kill-previous:
   stage: deploy
   script:
     - fuser -k 5000/tcp # kill existing connections on port 5000/tcp
+
+deploy-app:  
+  stage: deploy
+  needs:
+    - kill-previous
+  script:
     - export PORT=5000
     - sh target/bin/simplewebapp & # run in background
