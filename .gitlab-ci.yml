@@ -31,3 +31,10 @@ deploy-app:
   script:
     - export PORT=$PORT
     - sh target/bin/simplewebapp > stdout.log 2>stderr.log & # run in background
+
+heroku-deploy:
+  stage: deploy
+  needs:
+    - maven-package
+  script:
+    - dpl --provider=heroku --app=ms2320-simplewebapp --api-key=$MS_API_KEY
