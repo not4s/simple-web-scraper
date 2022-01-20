@@ -30,4 +30,4 @@ deploy-app:
     - maven-package
   script:
     - export PORT=$PORT
-    - sh target/bin/simplewebapp & # run in background
+    - sh target/bin/simplewebapp > stdout.log 2>stderr.log & # run in background
