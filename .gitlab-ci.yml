@@ -1,3 +1,6 @@
+variables:
+  PORT: 5000
+
 maven-compile:
   stage: build
   script:
@@ -16,7 +19,7 @@ maven-test:
 kill-previous:
   stage: build
   script:
-    - fuser -k -n tcp 5000 # kill existing connections on port 5000/tcp
+    - fuser -k tcp $PORT/tcp || true # kill existing connections on port 5000/tcp, ignore errors
 
 deploy-app:  
   stage: deploy
@@ -24,5 +27,5 @@ deploy-app:
     - kill-previous
     - maven-package
   script:
-    - export PORT=5000
+    - export PORT=$PORT
     - sh target/bin/simplewebapp & # run in background
