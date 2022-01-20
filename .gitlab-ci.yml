@@ -5,19 +5,25 @@ maven-compile:
 
 maven-test:
   stage: test
-  needs: [maven-compile]
+  needs: 
+    - maven-compile
   script:
     - mvn test
 
 maven-package:
   stage: deploy
-  needs: [maven-compile]
+  needs: 
+    - maven-compile
+    - job: maven-test
+      artifacts: false
   script:
     - mvn package
 
 host-website:
   stage: deploy
-  needs: [maven-package]
+  needs: 
+    - maven-compile
+    - maven-package
   interruptible: true
   script:
     - export PORT=5000
