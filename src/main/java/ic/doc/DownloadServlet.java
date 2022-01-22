@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 @WebServlet("/downloadServlet")
 public class DownloadServlet extends HttpServlet {
@@ -13,6 +15,16 @@ public class DownloadServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-    System.out.println("Hello World!");
+    response.setContentType("text/markdown");
+    response.setHeader("Content-disposition", "attachment; filename=query.md");
+
+    try(OutputStream out = response.getOutputStream()) {
+
+      String sb = "# " +
+              request.getParameter("title") +
+              "\n" +
+              request.getParameter("description");
+      out.write(sb.getBytes());
+    }
   }
 }
