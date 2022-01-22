@@ -20,11 +20,11 @@ public class DownloadServlet extends HttpServlet {
 
     try(OutputStream out = response.getOutputStream()) {
 
-      String sb = "# " +
+      String content = "# " +
               request.getParameter("title") +
               "\n" +
               request.getParameter("description");
-      out.write(sb.getBytes());
+      out.write(content.getBytes());
     }
   }
 }
