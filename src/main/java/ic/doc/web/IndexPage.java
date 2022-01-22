@@ -24,7 +24,7 @@ public class IndexPage implements Page {
                         "<br><br><input type=\"submit\">" +
                         "</form>" +
                         "</p>");
-
+        
         // Footer
         writer.println("</body>");
         writer.println("</html>");

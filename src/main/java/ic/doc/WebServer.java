@@ -18,6 +18,7 @@ public class WebServer {
 
         ServletHandler handler = new ServletHandler();
         handler.addServletWithMapping(new ServletHolder(new Website()), "/*");
+        handler.addServletWithMapping(new ServletHolder(new DownloadServlet()), "/downloadServlet");
         server.setHandler(handler);
 
         server.start();

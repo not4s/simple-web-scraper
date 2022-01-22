@@ -34,6 +34,26 @@ public class HTMLResultPage implements Page {
 
         writer.println("<p><a href=\"/\">Back to Search Page</a></p>");
 
+        String description = "";
+        if (!(answer == null || answer.isEmpty())) {
+            description = answer;
+        }
+        // Download Options and Button
+        writer.println(
+                "<p><form name=\"downloadForm\" method=\"post\" action=\"downloadServlet\">" +
+                "<input type=\"text\" name=\"title\" style=\"display:none\" value=\"" +
+                        query + "\"/>" +
+                "<input type=\"text\" name=\"description\" style=\"display:none\" value=\"" +
+                        description + "\"/>" +
+                "<input type=\"radio\" id=\"html\" name=\"file_type\" value=\"HTML\">\n" +
+                "<label for=\"html\">HTML file</label><br>\n" +
+                "<input type=\"radio\" id=\"md\" name=\"file_type\" value=\"Markdown\">\n" +
+                "<label for=\"md\">Markdown file</label><br>" +
+                "<input type=\"submit\" value=\"Download\">" +
+                "</form>" +
+                "</p>"
+        );
+
         // Footer
         writer.println("</body>");
         writer.println("</html>");
