@@ -25,16 +25,11 @@ kill-previous-webapp:
 
 deploy-selfhost-webapp:  
   stage: deploy
-  needs:
-    - kill-previous-webapp
-    - maven-package
   script:
     - export PORT=$PORT
     - sh target/bin/simplewebapp > stdout.log 2>stderr.log & # run in background
 
 deploy-heroku:
   stage: deploy
-  needs:
-    - maven-package
   script:
     - dpl --provider=heroku --app=ms2320-simplewebapp --api-key=$MS_API_KEY
