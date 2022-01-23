@@ -16,7 +16,7 @@ public class HtmlFile implements Downloadable {
         "<!DOCTYPE html>\n" +
             "<html lang=\"en\">\n" +
             "<head>\n" +
-            "<meta charset=\"UTF-8\"\n>" +
+            "<meta charset=\"UTF-8\">\n" +
             "<title>" + title + "</title>\n" +
             "</head>\n" +
             "<body>\n" +
