@@ -13,17 +13,17 @@ public class HtmlFile implements Downloadable {
   @Override
   public byte[] getTextContentBytes() {
     String content =
-            "<!DOCTYPE html>\n" +
+        "<!DOCTYPE html>\n" +
             "<html lang=\"en\">\n" +
             "<head>\n" +
-              "<meta charset=\"UTF-8\"\n>" +
-              "<title>" + title + "</title>\n" +
+            "<meta charset=\"UTF-8\"\n>" +
+            "<title>" + title + "</title>\n" +
             "</head>\n" +
             "<body>\n" +
-              "<h1>\n" +
-                title +
-              "</h1>\n" +
-              description +
+            "<h1>\n" +
+            title +
+            "</h1>\n" +
+            description +
             "</body>\n" +
             "</html>\n";
     return content.getBytes();

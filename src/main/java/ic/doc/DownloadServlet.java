@@ -3,22 +3,21 @@ package ic.doc;
 import ic.doc.downloads.Downloadable;
 import ic.doc.downloads.HtmlFile;
 import ic.doc.downloads.MarkDownFile;
-
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 
 @WebServlet("/downloadServlet")
 public class DownloadServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request,
-                        HttpServletResponse response) throws ServletException, IOException {
+      HttpServletResponse response) throws ServletException, IOException {
     try {
       String fileType = request.getParameter("file_type");
       if (fileType == null) {
