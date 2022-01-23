@@ -1,18 +1,35 @@
 package ic.doc.downloads;
 
-public class MarkDownFile implements Downloadable {
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
-  private final String title;
-  private final String description;
+public class MarkDownFile extends Downloadable {
 
-  public MarkDownFile(String title, String description) {
-    this.title = title;
-    this.description = description;
+  public MarkDownFile(String title, String description)
+      throws IOException {
+    super(title, description, ".md", "text/markdown");
   }
 
   @Override
-  public byte[] getTextContentBytes() {
-    String content = "# " + title + "\n" + description;
-    return content.getBytes();
+  protected void saveToFile() {
+    StringBuilder sb = new StringBuilder();
+    BufferedWriter writer;
+    try {
+      writer = new BufferedWriter(new FileWriter(file));
+    } catch (IOException e) {
+      e.printStackTrace();
+      return;
+    }
+    sb.append("# ")
+        .append(title)
+        .append("\n")
+        .append(description);
+    try {
+      writer.write(sb.toString());
+      writer.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

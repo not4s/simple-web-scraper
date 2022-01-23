@@ -1,31 +1,45 @@
 package ic.doc.downloads;
 
-public class HtmlFile implements Downloadable {
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
-  private final String title;
-  private final String description;
+public class HtmlFile extends Downloadable {
 
-  public HtmlFile(String title, String description) {
-    this.title = title;
-    this.description = description;
+  public HtmlFile(String title, String description) throws IOException {
+    super(title, description, ".html", "text/html");
   }
 
   @Override
-  public byte[] getTextContentBytes() {
-    String content =
-        "<!DOCTYPE html>\n" +
-            "<html lang=\"en\">\n" +
-            "<head>\n" +
-            "<meta charset=\"UTF-8\">\n" +
-            "<title>" + title + "</title>\n" +
-            "</head>\n" +
-            "<body>\n" +
-            "<h1>\n" +
-            title +
-            "</h1>\n" +
-            description +
-            "</body>\n" +
-            "</html>\n";
-    return content.getBytes();
+  protected void saveToFile() {
+    StringBuilder sb = new StringBuilder();
+    BufferedWriter writer;
+    try {
+      writer = new BufferedWriter(new FileWriter(file));
+    } catch (IOException e) {
+      e.printStackTrace();
+      return;
+    }
+    sb.append("<!DOCTYPE html>\n")
+        .append("<html lang=\"en\">\n")
+        .append("<head>\n")
+        .append("<meta charset=\"UTF-8\">\n")
+        .append("<title>")
+        .append(title)
+        .append("</title>\n")
+        .append("</head>\n")
+        .append("<body>\n")
+        .append("<h1>\n")
+        .append(title)
+        .append("</h1>\n")
+        .append(description)
+        .append("</body>\n")
+        .append("</html>\n");
+    try {
+      writer.write(sb.toString());
+      writer.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

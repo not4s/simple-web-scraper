@@ -49,6 +49,8 @@ public class HTMLResultPage implements Page {
             "<label for=\"html\">HTML file</label><br>\n" +
             "<input type=\"radio\" id=\"md\" name=\"file_type\" value=\"Markdown\">\n" +
             "<label for=\"md\">Markdown file</label><br>" +
+            "<input type=\"radio\" id=\"pdf\" name=\"file_type\" value=\"PDF\">\n" +
+            "<label for=\"pdf\">PDF</label><br>" +
             "<input type=\"submit\" value=\"Download\">" +
             "</form>" +
             "</p>"
