@@ -1,3 +1,4 @@
+
 package ic.doc.downloads;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class PdfFile extends Downloadable {
     }
 
     // Start pandoc process
-    ProcessBuilder pb = new ProcessBuilder("/usr/local/bin/pandoc",
+    ProcessBuilder pb = new ProcessBuilder("./pandoc",
         "-f",
         "markdown",
 
