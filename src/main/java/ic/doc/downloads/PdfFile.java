@@ -21,7 +21,7 @@ public class PdfFile extends Downloadable {
     }
 
     // Start pandoc process
-    ProcessBuilder pb = new ProcessBuilder("./pandoc",
+    ProcessBuilder pb = new ProcessBuilder("/usr/bin/pandoc",
         "-f",
         "markdown",
 
