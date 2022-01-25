@@ -6,13 +6,6 @@ maven-compile:
   script:
     - mvn compile
 
-maven-package:
-  stage: build
-  artifacts: 
-    untracked: true
-  script:
-    - mvn package
-
 maven-test:
   stage: test
   script:
@@ -23,8 +16,16 @@ kill-previous-webapp:
   script:
     - fuser -k tcp $PORT/tcp || true # kill existing connections on port 5000/tcp, ignore errors
 
+maven-package:
+  stage: deploy
+  artifacts: 
+    untracked: true
+  script:
+    - mvn package
+
 deploy-selfhost-webapp:  
   stage: deploy
+  needs: maven-package
   script:
     - export PORT=$PORT
     - sh target/bin/simplewebapp > stdout.log 2>stderr.log & # run in background
