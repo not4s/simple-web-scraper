@@ -3,6 +3,7 @@ package ic.doc;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -39,6 +40,10 @@ public class QueryProcessorTest {
   @Test
   public void isNotCaseSensitive() throws Exception {
     assertThat(queryProcessor.process("shakespeare"), containsString("playwright"));
+  }
+  @Test
+  public void alwaysFailsTest() throws Exception {
+    fail();
   }
 
 
