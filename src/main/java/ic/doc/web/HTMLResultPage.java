@@ -1,7 +1,10 @@
 package ic.doc.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import javax.servlet.http.HttpServletResponse;
 
 public class HTMLResultPage implements Page {
@@ -12,6 +15,38 @@ public class HTMLResultPage implements Page {
   public HTMLResultPage(String query, String answer) {
     this.query = query;
     this.answer = answer;
+  }
+
+  private String scrapWiki() {
+    File tempFile;
+    try {
+      tempFile = File.createTempFile("extra_html_content", "txt");
+    } catch (IOException e) {
+      return null;
+    }
+    ProcessBuilder pb = new ProcessBuilder("python3",
+            "lucky.py",
+            query,
+            tempFile.getAbsolutePath());
+
+    Process p;
+    try {
+      p = pb.start();
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    }
+    try {
+      p.waitFor();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    try {
+      return Files.readString(Path.of(tempFile.getAbsolutePath()));
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
   public void writeTo(HttpServletResponse resp) throws IOException {
@@ -55,6 +90,14 @@ public class HTMLResultPage implements Page {
             "</form>" +
             "</p>"
     );
+
+    if (answer != null) {
+      String extraContent = scrapWiki();
+      if (extraContent != null) {
+        writer.println("<p>Additional Content</p>");
+        writer.println(extraContent);
+      }
+    }
 
     // Footer
     writer.println("</body>");
